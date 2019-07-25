@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- jquery cdn -->
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <!-- font awesome cdn-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+    <!-- bootstrap cdn -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js">
+    <!-- custom css -->
+    <link rel="stylesheet" href="css/style.css">
+    <title>Todo-List</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row">
+            <input type="text" class="txtb" placeholder="Add a task">
+            <div class="notcomp">
+                <h3>Not Completed</h3>
+
+            </div>
+
+            <div class="comp">
+                <h3>completed</h3>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- custom script -->
+    <script type="text/javascript">
+        $(".txtb").on("keyup", function (e) {
+            // 13 means enter button
+            if (e.keyCode == 13 && $(".txtb").val() != "") {
+                var task = $("<div class='task'></div>").text($(".txtb").val());
+                var del = $("<i class='fas fa-trash-alt'></i>").click(function () {
+                    var p = $(this).parent();
+                    p.fadeOut(function () {
+                        p.remove();
+                    });
+                });
+                var check = $("<i class='fas fa-check'></i>").click(function () {
+                    var p = $(this).parent();
+                    p.fadeOut(function () {
+                        $(".comp").append(p);
+                        p.fadeIn();
+                    });
+                    $(this).remove();
+                });
+
+                task.append(del, check);
+                $(".notcomp").append(task);
+                // to clear the inputs
+                $(".txtb").val("");
+            }
+        });
+    </script>
+</body>
+
+</html>
